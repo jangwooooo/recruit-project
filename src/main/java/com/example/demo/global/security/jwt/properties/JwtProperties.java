@@ -1,4 +1,4 @@
-package com.example.jobgsm.global.security.jwt.properties;
+package com.example.demo.global.security.jwt.properties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.boot.context.properties.ConfigurationProperties;

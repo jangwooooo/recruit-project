@@ -1,4 +1,4 @@
-package com.example.jobgsm.global.security.handler;
+package com.example.demo.global.security.handler;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.AuthenticationException;
