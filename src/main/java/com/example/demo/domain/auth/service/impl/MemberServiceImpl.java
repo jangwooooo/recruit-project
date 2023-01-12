@@ -62,7 +62,7 @@ public class MemberServiceImpl implements MemberService {
                 .email(signUpDto.getEmail())
                 .password(passwordEncoder.encode(signUpDto.getPassword()))
                 .name(signUpDto.getName())
-                .grade(signUpDto.getGrade())
+                .introduction(signUpDto.getIntroduction())
                 .build();
         userRepository.save(user);
 
@@ -84,7 +84,7 @@ public class MemberServiceImpl implements MemberService {
         return UserSignInResponseDto.builder()
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
-                .grade(user.getGrade())
+                .grade(user.getIntroduction())
                 .name(user.getName())
                 .build();
     }

@@ -28,7 +28,7 @@ public class UserService {
                 .email(user.getEmail())
                 .password(user.getPassword())
                 .name(user.getName())
-                .grade(user.getGrade())
+                .introduction(user.getIntroduction())
                 .build();
     }
 
