@@ -14,7 +14,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 
-@RestController
+@RestController("/auth")
 @RequiredArgsConstructor
 @Slf4j
 public class AuthController {
@@ -32,15 +32,9 @@ public class AuthController {
     public UserSignInResponseDto login(@RequestBody @Validated UserSignInRequestDto signInDto) {
         return memberService.login(signInDto);
     }
-    @DeleteMapping
+    @DeleteMapping("/logout")
     public ResponseEntity<Void> logout(@RequestHeader("Authorization")String accessToken){
         memberService.execute(accessToken);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
-
-    @PatchMapping
-    public ResponseEntity<NewTokenResponse> reIssueToken(@RequestHeader("RefreshToken") String token) {
-        NewTokenResponse reIssueToken = memberService.tokenReissuance(token);
-        return new ResponseEntity<>(reIssueToken, HttpStatus.OK);
     }
 }
