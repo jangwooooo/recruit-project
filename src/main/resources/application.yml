@@ -15,7 +15,7 @@ spring:
         format_sql: 'true'
     show-sql: 'true'
     hibernate:
-      ddl-auto:
+      ddl-auto: update
     open-in-view: false
 
   mail:
@@ -26,8 +26,8 @@ spring:
             enable: 'true'
           auth: 'true'
     host: smtp.gmail.com
-    username: 'email'
-    password: 'password'
+    username: jobGSM2024@gmail.com
+    password: qztxfxuahhthdpha
     port: '587'
 
   redis:
@@ -35,3 +35,7 @@ spring:
     port: '6379'
 
   main.allow-bean-definition-overriding: true
+
+jwt:
+  accessSecret: yOeHjKegnwjbli5csZbO1jE9r+qoGkpWgX2JdHjw3tI=
+  refreshSecret: gjX7hf+563vQH/SMDh+K+A3MAbICvd3MtPLk/sZwizw=(
