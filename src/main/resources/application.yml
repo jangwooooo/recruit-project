@@ -1,11 +1,13 @@
 spring:
 
+  # DB연결 설정
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/siuuu?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true
     username: root
     password: 123456
 
+  #JPA 설정
   jpa:
     generate-ddl: 'false'
     database: mysql
@@ -18,6 +20,7 @@ spring:
       ddl-auto:
     open-in-view: false
 
+  # 메일전송 설정
   mail:
     properties:
       mail:
@@ -30,12 +33,14 @@ spring:
     password: qztxfxuahhthdpha
     port: '587'
 
+  # redis 설정
   redis:
     host: 127.0.0.1
     port: '6379'
 
   main.allow-bean-definition-overriding: true
 
+# jwt 설정
 jwt:
   accessSecret: yOeHjKegnwjbli5csZbO1jE9r+qoGkpWgX2JdHjw3tI=
   refreshSecret: gjX7hf+563vQH/SMDh+K+A3MAbICvd3MtPLk/sZwizw=(
