@@ -22,7 +22,7 @@ public class UserSignUpRequestDto {
     @NotBlank
     private String name;
 
-    @NotBlank
+    @NotNull
     private String introduction;
 
     public User toEntity(){
