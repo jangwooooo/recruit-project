@@ -68,7 +68,7 @@ public class MemberServiceImpl implements MemberService {
 
     }
 
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional
     @Override
     public UserSignInResponseDto login(UserSignInRequestDto signInDto) {
         User user = userRepository.findUserByEmail(signInDto.getEmail()).orElseThrow(() -> new UserNotFoundException("유저를 찾지 못했습니다."));
@@ -90,15 +90,12 @@ public class MemberServiceImpl implements MemberService {
     }
 
 
-    @Transactional(rollbackFor = Exception.class)
-    public void execute(String accessToken){
+    @Transactional
+    public void logout(String accessToken){
         User user = userUtil.currentUser();
-        System.out.println(user.getEmail());
-        System.out.println(refreshTokenRepository.findAll());
         RefreshToken refreshToken = refreshTokenRepository.findById(user.getEmail()).orElseThrow(()->new RefreshTokenNotFoundException("refreshToken 을 찾을 수 없습니다."));
         refreshTokenRepository.delete(refreshToken);
         saveBlackList(user.getEmail(),accessToken);
-        System.out.println(blackListRepository.findAll());
     }
     private void saveBlackList(String email, String accessToken){
         if(redisTemplate.opsForValue().get(accessToken)!=null){
@@ -112,7 +109,7 @@ public class MemberServiceImpl implements MemberService {
         blackListRepository.save(blackList);
 
     }
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional
     public NewTokenResponse tokenReissuance(String reqToken) {
         String email = tokenProvider.getUserEmail(reqToken, jwtProperties.getRefreshSecret());
         RefreshToken token = refreshTokenRepository.findById(email)

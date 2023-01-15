@@ -14,7 +14,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 
-@RestController("/auth")
+@RestController
+@RequestMapping("/auth")
 @RequiredArgsConstructor
 @Slf4j
 public class AuthController {
@@ -33,8 +34,8 @@ public class AuthController {
         return memberService.login(signInDto);
     }
     @DeleteMapping("/logout")
-    public ResponseEntity<Void> logout(@RequestHeader("Authorization")String accessToken){
-        memberService.execute(accessToken);
+    public ResponseEntity<Void> logout(@RequestHeader("authorization") String accessToken){
+        memberService.logout(accessToken);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
