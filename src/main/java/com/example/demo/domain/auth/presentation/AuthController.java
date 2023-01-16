@@ -4,7 +4,7 @@ package com.example.demo.domain.auth.presentation;
 import com.example.demo.domain.auth.presentation.dto.request.UserSignInRequestDto;
 import com.example.demo.domain.auth.presentation.dto.request.UserSignUpRequestDto;
 import com.example.demo.domain.auth.presentation.dto.response.UserSignInResponseDto;
-import com.example.demo.domain.auth.service.impl.MemberServiceImpl;
+import com.example.demo.domain.auth.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 public class AuthController {
 
-    private final MemberServiceImpl memberService;
+    private final MemberService memberService;
 
     @CrossOrigin
     @PostMapping("/signup")

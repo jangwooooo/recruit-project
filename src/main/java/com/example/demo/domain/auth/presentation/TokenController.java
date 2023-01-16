@@ -1,7 +1,7 @@
 package com.example.demo.domain.auth.presentation;
 
 import com.example.demo.domain.auth.presentation.dto.response.NewTokenResponse;
-import com.example.demo.domain.auth.service.impl.MemberServiceImpl;
+import com.example.demo.domain.auth.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class TokenController {
 
-    private final MemberServiceImpl memberService;
+    private final MemberService memberService;
 
     @GetMapping("/token/reissue")
     public ResponseEntity<NewTokenResponse> reIssueToken(@RequestHeader("RefreshToken") String refreshToken) {
