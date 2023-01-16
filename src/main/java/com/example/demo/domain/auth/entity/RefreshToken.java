@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
+import org.springframework.data.redis.core.TimeToLive;
 import org.springframework.data.redis.core.index.Indexed;
 
 
@@ -19,6 +20,9 @@ public class RefreshToken {
     private String email;
     @Indexed
     private String refreshToken;
+
+    @TimeToLive
+    private long expiredAt;
 
     public void exchangeRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;
