@@ -26,7 +26,6 @@ public class UserService {
         User user = userUtil.currentUser();
         return MyPageResponse.builder()
                 .email(user.getEmail())
-                .password(user.getPassword())
                 .name(user.getName())
                 .introduction(user.getIntroduction())
                 .build();
