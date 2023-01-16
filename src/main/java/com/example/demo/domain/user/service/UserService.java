@@ -47,10 +47,10 @@ public class UserService {
 
     @Transactional
     public void editPwd(PwdRequest pwdRequest) {
-        User user = userUtil.currentUser();
-        User user1 = userRepository.findUserByEmail(user.getEmail())
+        User currentUser = userUtil.currentUser();
+        User user1 = userRepository.findUserByEmail(currentUser.getEmail())
                 .orElseThrow(() -> new UserNotFoundException("유저를 찾을 수 없습니다."));
-        if(!passwordEncoder.matches(pwdRequest.getPassword(), user.getPassword())) {
+        if(!passwordEncoder.matches(pwdRequest.getPassword(), currentUser.getPassword())) {
             throw new PasswordWrongException("비밀번호가 올바르지 않습니다.");
         }
         user1.updatePassword(passwordEncoder.encode(pwdRequest.getPassword()));
