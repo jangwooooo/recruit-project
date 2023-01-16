@@ -12,7 +12,4 @@ import lombok.NoArgsConstructor;
 public class UserSignInResponseDto {
     private String accessToken;
     private String refreshToken;
-    //private Long userId;
-    private String name;
-    private String grade;
 }
