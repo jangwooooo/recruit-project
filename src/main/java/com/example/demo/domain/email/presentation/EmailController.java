@@ -1,6 +1,5 @@
 package com.example.demo.domain.email.presentation;
 
-import com.example.demo.domain.email.presentation.dto.response.VerifyCheck;
 import com.example.demo.domain.email.service.EmailCheckerService;
 import com.example.demo.domain.email.service.EmailSenderService;
 import com.example.demo.domain.email.presentation.dto.request.EmailSentDto;
@@ -29,7 +28,8 @@ public class EmailController {
     }
 
     @PostMapping("/check")
-        public ResponseEntity<VerifyCheck> mailVerify(@Email @RequestParam String email, @RequestParam String authKey){
-            return ResponseEntity.ok().body(emailCheckerService.execute(email,authKey));
+        public ResponseEntity<Void> mailVerify(@Email @RequestParam String email, @RequestParam String authKey){
+            emailCheckerService.execute(email, authKey);
+            return ResponseEntity.ok().build();
     }
 }
