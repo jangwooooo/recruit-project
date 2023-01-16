@@ -25,13 +25,11 @@ public class EmailController {
     @PostMapping
     public ResponseEntity<Void> authEmail(@RequestBody @Valid EmailSentDto emailSentDto) {
         emailSenderService.execute(emailSentDto);
-        System.out.println("authmail");
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/check")
         public ResponseEntity<VerifyCheck> mailVerify(@Email @RequestParam String email, @RequestParam String authKey){
-            System.out.println("mailverify");
             return ResponseEntity.ok().body(emailCheckerService.execute(email,authKey));
     }
 }
