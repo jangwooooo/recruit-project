@@ -35,8 +35,8 @@ public class User implements UserDetails {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "introduction")
-    private String introduction;
+    @Column(name = "bio")
+    private String bio;
 
     @Transient
     @Enumerated(EnumType.STRING)

@@ -27,7 +27,7 @@ public class UserService {
         return MyPageResponse.builder()
                 .email(user.getEmail())
                 .name(user.getName())
-                .introduction(user.getIntroduction())
+                .bio(user.getBio())
                 .build();
     }
 

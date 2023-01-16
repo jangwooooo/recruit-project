@@ -23,14 +23,14 @@ public class UserSignUpRequestDto {
     private String name;
 
     @NotNull
-    private String introduction;
+    private String bio;
 
     public User toEntity(){
         return User.builder()
                 .email(email)
                 .password(password)
                 .name(name)
-                .introduction(introduction)
+                .bio(bio)
                 .build();
     }
 

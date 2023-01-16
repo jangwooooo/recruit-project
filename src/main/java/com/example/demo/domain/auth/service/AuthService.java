@@ -60,7 +60,7 @@ public class AuthService {
                 .email(signUpDto.getEmail())
                 .password(passwordEncoder.encode(signUpDto.getPassword()))
                 .name(signUpDto.getName())
-                .introduction(signUpDto.getIntroduction())
+                .bio(signUpDto.getBio())
                 .build();
         userRepository.save(user);
 
