@@ -21,7 +21,8 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<MyPageResponse> myPage() {
-        return ResponseEntity.ok().body(userService.myPage());
+        MyPageResponse data = userService.myPage();
+        return ResponseEntity.ok().body(data);
     }
 
     @DeleteMapping
