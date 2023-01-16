@@ -31,7 +31,7 @@ import java.time.ZonedDateTime;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class MemberService {
+public class AuthService {
 
     private final RefreshTokenRepository refreshTokenRepository;
     private final BlackListRepository blackListRepository;
