@@ -13,4 +13,7 @@ public class PwdRequest {
 
     @NotEmpty
     private String password;
+
+    @NotEmpty
+    private String newPassword;
 }
