@@ -3,7 +3,6 @@ package com.example.demo.domain.auth.presentation;
 
 import com.example.demo.domain.auth.presentation.dto.request.UserSignInRequestDto;
 import com.example.demo.domain.auth.presentation.dto.request.UserSignUpRequestDto;
-import com.example.demo.domain.auth.presentation.dto.response.NewTokenResponse;
 import com.example.demo.domain.auth.presentation.dto.response.UserSignInResponseDto;
 import com.example.demo.domain.auth.service.impl.MemberServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -19,8 +18,8 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @Slf4j
 public class AuthController {
-    private final MemberServiceImpl memberService;
 
+    private final MemberServiceImpl memberService;
 
     @CrossOrigin
     @PostMapping("/signup")
@@ -35,6 +34,7 @@ public class AuthController {
         UserSignInResponseDto data = memberService.login(signInDto);
         return new ResponseEntity<>(data, HttpStatus.OK);
     }
+
     @DeleteMapping("/logout")
     public ResponseEntity<Void> logout(@RequestHeader("authorization") String accessToken){
         memberService.logout(accessToken);
