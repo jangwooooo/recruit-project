@@ -24,8 +24,9 @@ public class AuthController {
 
     @CrossOrigin
     @PostMapping("/signup")
-    public void signup(@RequestBody @Validated UserSignUpRequestDto signUpDto){
+    public ResponseEntity<Void> signup(@RequestBody @Validated UserSignUpRequestDto signUpDto){
          memberService.signUp(signUpDto);
+         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @CrossOrigin
