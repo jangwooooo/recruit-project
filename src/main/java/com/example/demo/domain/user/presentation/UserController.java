@@ -4,6 +4,7 @@ import com.example.demo.domain.user.presentation.dto.request.PwdRequest;
 import com.example.demo.domain.user.presentation.dto.response.MyPageResponse;
 import com.example.demo.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +26,7 @@ public class UserController {
     @DeleteMapping
     public ResponseEntity<Void> deleteUser(@RequestBody @Valid PwdRequest pwdRequest) {
         userService.deleteUser(pwdRequest);
-        return ResponseEntity.ok().build();
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @PutMapping
