@@ -32,6 +32,6 @@ public class UserController {
     @PutMapping
     public ResponseEntity<Void> changePassword(@RequestBody @Valid PwdRequest pwdRequest) {
         userService.editPwd(pwdRequest);
-        return ResponseEntity.ok().build();
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
