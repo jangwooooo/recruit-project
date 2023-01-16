@@ -31,8 +31,9 @@ public class AuthController {
 
     @CrossOrigin
     @PostMapping("/login")
-    public UserSignInResponseDto login(@RequestBody @Validated UserSignInRequestDto signInDto) {
-        return memberService.login(signInDto);
+    public ResponseEntity<UserSignInResponseDto> login(@RequestBody @Validated UserSignInRequestDto signInDto) {
+        UserSignInResponseDto data = memberService.login(signInDto);
+        return new ResponseEntity<>(data, HttpStatus.OK);
     }
     @DeleteMapping("/logout")
     public ResponseEntity<Void> logout(@RequestHeader("authorization") String accessToken){
