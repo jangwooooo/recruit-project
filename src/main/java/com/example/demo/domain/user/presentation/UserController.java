@@ -30,7 +30,7 @@ public class UserController {
     }
 
     @PutMapping
-    public ResponseEntity<Void> editUser(@RequestBody @Valid PwdRequest pwdRequest) {
+    public ResponseEntity<Void> changePassword(@RequestBody @Valid PwdRequest pwdRequest) {
         userService.editPwd(pwdRequest);
         return ResponseEntity.ok().build();
     }
