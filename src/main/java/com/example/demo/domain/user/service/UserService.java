@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -48,11 +49,11 @@ public class UserService {
     @Transactional
     public void editPwd(PwdRequest pwdRequest) {
         User currentUser = userUtil.currentUser();
-        User user1 = userRepository.findUserByEmail(currentUser.getEmail())
+        User user = userRepository.findUserByEmail(currentUser.getEmail())
                 .orElseThrow(() -> new UserNotFoundException("유저를 찾을 수 없습니다."));
         if(!passwordEncoder.matches(pwdRequest.getPassword(), currentUser.getPassword())) {
             throw new PasswordWrongException("비밀번호가 올바르지 않습니다.");
         }
-        user1.updatePassword(passwordEncoder.encode(pwdRequest.getPassword()));
+        user.updatePassword(passwordEncoder.encode(pwdRequest.getNewPassword()));
     }
 }
