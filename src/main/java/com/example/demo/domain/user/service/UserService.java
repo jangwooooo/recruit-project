@@ -5,6 +5,7 @@ import com.example.demo.domain.user.presentation.dto.response.MyPageResponse;
 import com.example.demo.domain.user.entity.User;
 import com.example.demo.domain.user.exception.PasswordWrongException;
 import com.example.demo.domain.user.exception.UserNotFoundException;
+import com.example.demo.domain.user.presentation.dto.response.ProfileRes;
 import com.example.demo.domain.user.repository.UserRepository;
 import com.example.demo.global.util.UserUtil;
 import lombok.RequiredArgsConstructor;
@@ -55,5 +56,15 @@ public class UserService {
             throw new PasswordWrongException("비밀번호가 올바르지 않습니다.");
         }
         user.updatePassword(passwordEncoder.encode(pwdRequest.getNewPassword()));
+    }
+
+    @Transactional
+    public ProfileRes profile(String name) {
+        User user = userRepository.findUserByName(name).orElseThrow(() -> new UserNotFoundException("유저를 찾을 수 없습니다."));
+        System.out.println(user);
+        return ProfileRes.builder()
+                .name(user.getName())
+                .bio(user.getBio())
+                .build();
     }
 }

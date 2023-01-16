@@ -2,6 +2,7 @@ package com.example.demo.domain.user.presentation;
 
 import com.example.demo.domain.user.presentation.dto.request.PwdRequest;
 import com.example.demo.domain.user.presentation.dto.response.MyPageResponse;
+import com.example.demo.domain.user.presentation.dto.response.ProfileRes;
 import com.example.demo.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -33,5 +34,11 @@ public class UserController {
     public ResponseEntity<Void> changePassword(@RequestBody @Valid PwdRequest pwdRequest) {
         userService.editPwd(pwdRequest);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/profile")
+    public ResponseEntity<ProfileRes> profile(@RequestParam String name) {
+        ProfileRes data = userService.profile(name);
+        return new ResponseEntity<>(data, HttpStatus.OK);
     }
 }
