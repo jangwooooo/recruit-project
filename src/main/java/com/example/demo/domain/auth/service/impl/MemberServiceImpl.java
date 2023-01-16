@@ -78,17 +78,12 @@ public class MemberServiceImpl implements MemberService {
         String accessToken = tokenProvider.generatedAccessToken(signInDto.getEmail());
         String refreshToken = tokenProvider.generatedRefreshToken(signInDto.getEmail());
         RefreshToken entityToRedis = new RefreshToken(signInDto.getEmail(), refreshToken);
-        System.out.println("entityToRedis = " + entityToRedis);
         refreshTokenRepository.save(entityToRedis);
-        System.out.println(refreshTokenRepository.findAll());
         return UserSignInResponseDto.builder()
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
-                .grade(user.getIntroduction())
-                .name(user.getName())
                 .build();
     }
-
 
     @Transactional
     public void logout(String accessToken){
@@ -97,6 +92,7 @@ public class MemberServiceImpl implements MemberService {
         refreshTokenRepository.delete(refreshToken);
         saveBlackList(user.getEmail(),accessToken);
     }
+
     private void saveBlackList(String email, String accessToken){
         if(redisTemplate.opsForValue().get(accessToken)!=null){
             throw new BlackListAlreadyExistException("블랙리스트에 이미 등록되어있습니다.");
@@ -107,16 +103,13 @@ public class MemberServiceImpl implements MemberService {
                 .accessToken(accessToken)
                 .build();
         blackListRepository.save(blackList);
-
     }
+
     @Transactional
     public NewTokenResponse tokenReissuance(String reqToken) {
         String email = tokenProvider.getUserEmail(reqToken, jwtProperties.getRefreshSecret());
         RefreshToken token = refreshTokenRepository.findById(email)
                 .orElseThrow(() -> new RefreshTokenNotFoundException("존재하지 않은 refreshToken 입니다"));
-
-        System.out.println(token.getRefreshToken());
-        System.out.println(reqToken);
         if(!token.getRefreshToken().equals(reqToken)) {
             throw new TokenNotValidException("토큰이 유효하지 않습니다");
         }
