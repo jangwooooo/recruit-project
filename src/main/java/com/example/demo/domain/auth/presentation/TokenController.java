@@ -18,8 +18,8 @@ public class TokenController {
     private final MemberServiceImpl memberService;
 
     @GetMapping("/reissue")
-    public ResponseEntity<NewTokenResponse> reIssueToken(@RequestHeader("RefreshToken") String token) {
-        NewTokenResponse reIssueToken = memberService.tokenReissuance(token);
+    public ResponseEntity<NewTokenResponse> reIssueToken(@RequestHeader("RefreshToken") String refreshToken) {
+        NewTokenResponse reIssueToken = memberService.tokenReissuance(refreshToken);
         return new ResponseEntity<>(reIssueToken, HttpStatus.OK);
     }
 }
