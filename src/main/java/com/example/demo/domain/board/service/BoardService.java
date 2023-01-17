@@ -1,4 +1,35 @@
 package com.example.demo.domain.board.service;
 
+import com.example.demo.domain.board.entity.Board;
+import com.example.demo.domain.board.presentation.dto.reqeust.PostBoardReq;
+import com.example.demo.domain.board.repository.BoardRepository;
+import com.example.demo.domain.user.entity.User;
+import com.example.demo.global.util.UserUtil;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+
+@Service
+@RequiredArgsConstructor
 public class BoardService {
+
+    private final BoardRepository boardRepository;
+    private final UserUtil userUtil;
+
+    @Transactional
+    public void post(PostBoardReq req) {
+        User user = userUtil.currentUser();
+        Board board = Board.builder()
+                .author(user.getName())
+                .title(req.getTitle())
+                .content(req.getContent())
+                .type(req.getType())
+                .reqruit(req.getReqruit())
+                .contactType(req.getContactType())
+                .contactUs(req.getContactUs())
+                .endDate(req.getEndDate())
+                .build();
+        boardRepository.save(board);
+    }
 }

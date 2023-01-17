@@ -23,12 +23,12 @@ public class Board extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long boardId;
+    private String author;
     private String title;
     private String content;
     private String type;
     private String reqruit;
     private String contactType;
     private String contactUs;
-    private String author;
     private LocalDate endDate;
 }
