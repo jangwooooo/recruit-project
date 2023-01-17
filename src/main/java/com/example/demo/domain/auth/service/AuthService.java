@@ -5,6 +5,7 @@ import com.example.demo.domain.auth.entity.RefreshToken;
 import com.example.demo.domain.auth.exception.*;
 import com.example.demo.domain.auth.presentation.dto.request.UserSignInRequestDto;
 import com.example.demo.domain.auth.presentation.dto.request.UserSignUpRequestDto;
+import com.example.demo.domain.auth.presentation.dto.response.NameIsExistRes;
 import com.example.demo.domain.auth.presentation.dto.response.NewTokenResponse;
 import com.example.demo.domain.auth.presentation.dto.response.UserSignInResponseDto;
 import com.example.demo.domain.auth.repository.BlackListRepository;
@@ -64,6 +65,13 @@ public class AuthService {
                 .build();
         userRepository.save(user);
 
+    }
+
+    @Transactional
+    public NameIsExistRes checkNameIsExist(String name) {
+        NameIsExistRes nameIsExistRes = new NameIsExistRes();
+        nameIsExistRes.setIsExist(userRepository.existsByName(name));
+        return nameIsExistRes;
     }
 
     @Transactional

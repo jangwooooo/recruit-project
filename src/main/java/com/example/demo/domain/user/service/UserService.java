@@ -1,6 +1,5 @@
 package com.example.demo.domain.user.service;
 
-import com.example.demo.domain.auth.presentation.dto.response.NameIsExistRes;
 import com.example.demo.domain.user.presentation.dto.request.EditProfileReq;
 import com.example.demo.domain.user.presentation.dto.request.PwdRequest;
 import com.example.demo.domain.user.presentation.dto.response.MyPageResponse;
@@ -77,13 +76,6 @@ public class UserService {
                 .name(user.getName())
                 .bio(user.getBio())
                 .build();
-    }
-
-    @Transactional
-    public NameIsExistRes checkNameIsExist(String name) {
-        NameIsExistRes nameIsExistRes = new NameIsExistRes();
-        nameIsExistRes.setIsExist(userRepository.existsByName(name));
-        return nameIsExistRes;
     }
 
     @Transactional

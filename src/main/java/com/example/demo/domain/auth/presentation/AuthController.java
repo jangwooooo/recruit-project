@@ -6,7 +6,6 @@ import com.example.demo.domain.auth.presentation.dto.request.UserSignUpRequestDt
 import com.example.demo.domain.auth.presentation.dto.response.NameIsExistRes;
 import com.example.demo.domain.auth.presentation.dto.response.UserSignInResponseDto;
 import com.example.demo.domain.auth.service.AuthService;
-import com.example.demo.domain.user.presentation.dto.response.NameIsDuplicateRes;
 import com.example.demo.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +22,6 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     private final AuthService authService;
-    private final UserService userService;
 
     @PostMapping("/signup")
     public ResponseEntity<Void> signup(@RequestBody @Validated UserSignUpRequestDto signUpDto){
@@ -33,7 +31,7 @@ public class AuthController {
 
     @GetMapping("/check")
     public ResponseEntity<NameIsExistRes> checkNameIsExist(@RequestParam String name) {
-        NameIsExistRes data = userService.checkNameIsExist(name);
+        NameIsExistRes data = authService.checkNameIsExist(name);
         return new ResponseEntity<>(data, HttpStatus.OK);
     }
 
