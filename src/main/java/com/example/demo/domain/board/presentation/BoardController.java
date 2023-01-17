@@ -1,5 +1,6 @@
 package com.example.demo.domain.board.presentation;
 
+import com.example.demo.domain.board.presentation.dto.reqeust.EditBoardReq;
 import com.example.demo.domain.board.presentation.dto.reqeust.PostBoardReq;
 import com.example.demo.domain.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,7 @@ public class BoardController {
     }
 
     @PutMapping
-    public ResponseEntity<Void> editBoard(@RequestBody @Valid PostBoardReq req) {
+    public ResponseEntity<Void> editBoard(@RequestBody @Valid EditBoardReq req) {
         boardService.edit(req);
         return new ResponseEntity<>(HttpStatus.OK);
     }

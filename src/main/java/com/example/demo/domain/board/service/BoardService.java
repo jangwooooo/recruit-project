@@ -2,6 +2,7 @@ package com.example.demo.domain.board.service;
 
 import com.example.demo.domain.board.entity.Board;
 import com.example.demo.domain.board.exception.BoardNotFoundException;
+import com.example.demo.domain.board.presentation.dto.reqeust.EditBoardReq;
 import com.example.demo.domain.board.presentation.dto.reqeust.PostBoardReq;
 import com.example.demo.domain.board.repository.BoardRepository;
 import com.example.demo.domain.user.entity.User;
@@ -35,9 +36,8 @@ public class BoardService {
     }
 
     @Transactional
-    public void edit(PostBoardReq req) {
-        User currentUser = userUtil.currentUser();
-        Board board = boardRepository.findBoardByAuthor(currentUser.getName())
+    public void edit(EditBoardReq req) {
+        Board board = boardRepository.findById(req.getBoardId())
                 .orElseThrow(() -> new BoardNotFoundException("게시글을 찾을 수 없습니다."));
         board.update(req);
     }
