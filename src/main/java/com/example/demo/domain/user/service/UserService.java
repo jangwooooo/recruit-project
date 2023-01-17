@@ -35,11 +35,6 @@ public class UserService {
                 .build();
     }
 
-//    public void deleteUser(Long id) {
-//        userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("유저를 찾을 수 없습니다."));
-//        userRepository.deleteById(id);
-//    }d
-
     @Transactional
     public void deleteUser(PwdRequest pwdRequest){
         User user = userUtil.currentUser();
@@ -70,8 +65,8 @@ public class UserService {
 
     @Transactional
     public ProfileRes profile(String name) {
-        User user = userRepository.findUserByName(name).orElseThrow(() -> new UserNotFoundException("유저를 찾을 수 없습니다."));
-        System.out.println(user);
+        User user = userRepository.findUserByName(name)
+                .orElseThrow(() -> new UserNotFoundException("유저를 찾을 수 없습니다."));
         return ProfileRes.builder()
                 .name(user.getName())
                 .bio(user.getBio())
