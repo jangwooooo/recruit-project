@@ -10,6 +10,7 @@ public enum ErrorCode {
     USER_NOT_FOUND("유저를 찾을 수 없습니다.",404),
     BOARD_NOT_FOUND("게시글을 찾을 수 없습니다.",404),
     NOT_NULL("null값은 허용되지 않습니다.", 400),
+    ALREADY_EXIST_NAME("이미 존재하는 닉네임입니다.", 400),
     NOT_VERIFY_EMAIL("이메일이 확인 되지 않음", 401),
     ALREADY_EXIST_EMAIL("이미 존재하는 이메일입니다." , 400),
 

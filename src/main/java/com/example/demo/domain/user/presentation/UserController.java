@@ -3,7 +3,6 @@ package com.example.demo.domain.user.presentation;
 import com.example.demo.domain.user.presentation.dto.request.EditProfileReq;
 import com.example.demo.domain.user.presentation.dto.request.PwdRequest;
 import com.example.demo.domain.user.presentation.dto.response.MyPageResponse;
-import com.example.demo.domain.user.presentation.dto.response.NameIsDuplicateRes;
 import com.example.demo.domain.user.presentation.dto.response.ProfileRes;
 import com.example.demo.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -48,12 +47,6 @@ public class UserController {
     @GetMapping("/profile")
     public ResponseEntity<ProfileRes> profile(@RequestParam String name) {
         ProfileRes data = userService.profile(name);
-        return new ResponseEntity<>(data, HttpStatus.OK);
-    }
-
-    @GetMapping("/check")
-    public ResponseEntity<NameIsDuplicateRes> checkNameDuplicate(@RequestParam String name) {
-        NameIsDuplicateRes data = userService.checkNameDuplicate(name);
         return new ResponseEntity<>(data, HttpStatus.OK);
     }
 }

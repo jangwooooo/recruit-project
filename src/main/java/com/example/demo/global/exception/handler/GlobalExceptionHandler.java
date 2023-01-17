@@ -5,6 +5,7 @@ import com.example.demo.domain.board.exception.BoardNotFoundException;
 import com.example.demo.domain.email.exception.AuthCodeExpiredException;
 import com.example.demo.domain.email.exception.AuthCodeMismatchException;
 import com.example.demo.domain.email.exception.ManyRequestEmailAuthException;
+import com.example.demo.domain.user.exception.NameAlreadyExistException;
 import com.example.demo.domain.user.exception.PasswordWrongException;
 import com.example.demo.domain.user.exception.UserNotFoundException;
 import com.example.demo.global.exception.ErrorCode;
@@ -72,6 +73,13 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(EmailAlreadyExistException.class)
     public ResponseEntity<ErrorResponse> handleEmailAlreadyExistException(EmailAlreadyExistException exception,HttpServletRequest request) {
         log.warn("handleExistEmailException 발생!!! url:{}, trace:{}", request.getRequestURI(), exception.getStackTrace());
+        ErrorResponse errorResponse = new ErrorResponse(exception.getErrorCode().getMessage(), exception.getErrorCode().getStatus());
+        return new ResponseEntity<>(errorResponse, HttpStatus.valueOf(exception.getErrorCode().getStatus()));
+    }
+
+    @ExceptionHandler(NameAlreadyExistException.class)
+    public ResponseEntity<ErrorResponse> NameAlreadyExistException(NameAlreadyExistException exception,HttpServletRequest request) {
+        log.warn("NameAlreadyExistException 발생!!! url:{}, trace:{}", request.getRequestURI(), exception.getStackTrace());
         ErrorResponse errorResponse = new ErrorResponse(exception.getErrorCode().getMessage(), exception.getErrorCode().getStatus());
         return new ResponseEntity<>(errorResponse, HttpStatus.valueOf(exception.getErrorCode().getStatus()));
     }

@@ -3,13 +3,13 @@ package com.example.demo.domain.user.service;
 import com.example.demo.domain.board.entity.Board;
 import com.example.demo.domain.board.repository.BoardRepository;
 import com.example.demo.domain.board.service.BoardService;
+import com.example.demo.domain.user.exception.NameAlreadyExistException;
 import com.example.demo.domain.user.presentation.dto.request.EditProfileReq;
 import com.example.demo.domain.user.presentation.dto.request.PwdRequest;
 import com.example.demo.domain.user.presentation.dto.response.MyPageResponse;
 import com.example.demo.domain.user.entity.User;
 import com.example.demo.domain.user.exception.PasswordWrongException;
 import com.example.demo.domain.user.exception.UserNotFoundException;
-import com.example.demo.domain.user.presentation.dto.response.NameIsDuplicateRes;
 import com.example.demo.domain.user.presentation.dto.response.ProfileRes;
 import com.example.demo.domain.user.repository.UserRepository;
 import com.example.demo.global.util.UserUtil;
@@ -55,6 +55,11 @@ public class UserService {
         User currentUser = userUtil.currentUser();
         User user = userRepository.findUserByEmail(currentUser.getEmail())
                 .orElseThrow(() -> new UserNotFoundException("유저를 찾을 수 없습니다."));
+        if(!Objects.equals(currentUser.getName(), req.getName())) {
+            if (userRepository.existsByName(req.getName())) {
+                throw new NameAlreadyExistException("이미 존재하는 닉네임입니다.");
+            }
+        }
         List<Board> boardList = boardRepository.findBoardsByAuthor(user.getName());
         for (Board board : boardList) {
             board.updateAuthor(req.getName());
@@ -81,17 +86,5 @@ public class UserService {
                 .name(user.getName())
                 .bio(user.getBio())
                 .build();
-    }
-
-    @Transactional
-    public NameIsDuplicateRes checkNameDuplicate(String name) {
-        User currentUser = userUtil.currentUser();
-        NameIsDuplicateRes nameIsDuplicateRes = new NameIsDuplicateRes();
-        if(!Objects.equals(currentUser.getName(), name)){
-            nameIsDuplicateRes.setIsDuplicate(userRepository.existsByName(name));
-        } else {
-            nameIsDuplicateRes.setIsDuplicate(false);
-        }
-        return nameIsDuplicateRes;
     }
 }
