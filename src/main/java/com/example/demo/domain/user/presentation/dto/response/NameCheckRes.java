@@ -1,5 +1,6 @@
 package com.example.demo.domain.user.presentation.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,5 +12,5 @@ import lombok.Setter;
 @AllArgsConstructor
 public class NameCheckRes {
 
-    private boolean isExist;
+    private Boolean isExist;
 }

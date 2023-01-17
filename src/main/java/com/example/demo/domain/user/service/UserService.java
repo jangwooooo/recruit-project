@@ -83,9 +83,9 @@ public class UserService {
         User currentUser = userUtil.currentUser();
         NameCheckRes nameCheckRes = new NameCheckRes();
         if(!Objects.equals(currentUser.getName(), name)){
-            nameCheckRes.setExist(userRepository.existsByName(name));
+            nameCheckRes.setIsExist(userRepository.existsByName(name));
         } else {
-            nameCheckRes.setExist(false);
+            nameCheckRes.setIsExist(false);
         }
         return nameCheckRes;
     }
