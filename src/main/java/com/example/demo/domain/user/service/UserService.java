@@ -6,7 +6,7 @@ import com.example.demo.domain.user.presentation.dto.response.MyPageResponse;
 import com.example.demo.domain.user.entity.User;
 import com.example.demo.domain.user.exception.PasswordWrongException;
 import com.example.demo.domain.user.exception.UserNotFoundException;
-import com.example.demo.domain.user.presentation.dto.response.NameCheckRes;
+import com.example.demo.domain.user.presentation.dto.response.NameIsDuplicateRes;
 import com.example.demo.domain.user.presentation.dto.response.ProfileRes;
 import com.example.demo.domain.user.repository.UserRepository;
 import com.example.demo.global.util.UserUtil;
@@ -79,21 +79,21 @@ public class UserService {
     }
 
     @Transactional
-    public NameCheckRes checkNameIsExist(String name) {
-        NameCheckRes nameCheckRes = new NameCheckRes();
-        nameCheckRes.setIsExist(userRepository.existsByName(name));
+    public NameIsDuplicateRes checkNameIsExist(String name) {
+        NameIsDuplicateRes nameCheckRes = new NameIsDuplicateRes();
+        nameCheckRes.setIsDuplicate(userRepository.existsByName(name));
         return nameCheckRes;
     }
 
     @Transactional
-    public NameCheckRes checkNameDuplicate(String name) {
+    public NameIsDuplicateRes checkNameDuplicate(String name) {
         User currentUser = userUtil.currentUser();
-        NameCheckRes nameCheckRes = new NameCheckRes();
+        NameIsDuplicateRes nameIsDuplicateRes = new NameIsDuplicateRes();
         if(!Objects.equals(currentUser.getName(), name)){
-            nameCheckRes.setIsExist(userRepository.existsByName(name));
+            nameIsDuplicateRes.setIsDuplicate(userRepository.existsByName(name));
         } else {
-            nameCheckRes.setIsExist(false);
+            nameIsDuplicateRes.setIsDuplicate(false);
         }
-        return nameCheckRes;
+        return nameIsDuplicateRes;
     }
 }

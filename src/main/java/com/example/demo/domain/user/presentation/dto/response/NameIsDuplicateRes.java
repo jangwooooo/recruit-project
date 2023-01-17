@@ -1,6 +1,5 @@
 package com.example.demo.domain.user.presentation.dto.response;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,7 +9,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class NameCheckRes {
+public class NameIsDuplicateRes {
 
-    private Boolean isExist;
+    private Boolean isDuplicate;
 }

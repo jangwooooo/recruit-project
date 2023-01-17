@@ -5,7 +5,7 @@ import com.example.demo.domain.auth.presentation.dto.request.UserSignInRequestDt
 import com.example.demo.domain.auth.presentation.dto.request.UserSignUpRequestDto;
 import com.example.demo.domain.auth.presentation.dto.response.UserSignInResponseDto;
 import com.example.demo.domain.auth.service.AuthService;
-import com.example.demo.domain.user.presentation.dto.response.NameCheckRes;
+import com.example.demo.domain.user.presentation.dto.response.NameIsDuplicateRes;
 import com.example.demo.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,11 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 @CrossOrigin
 @RestController
@@ -36,8 +31,8 @@ public class AuthController {
     }
 
     @GetMapping("/check")
-    public ResponseEntity<NameCheckRes> checkSignupNameDuplicate(@RequestParam String name) {
-        NameCheckRes isExist = userService.checkNameIsExist(name);
+    public ResponseEntity<NameIsDuplicateRes> checkSignupNameDuplicate(@RequestParam String name) {
+        NameIsDuplicateRes isExist = userService.checkNameIsExist(name);
         return new ResponseEntity<>(isExist, HttpStatus.OK);
     }
 
