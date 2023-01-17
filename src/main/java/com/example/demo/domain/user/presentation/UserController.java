@@ -39,7 +39,7 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PatchMapping("/edit/pwd")
+    @PutMapping("/edit/pwd")
     public ResponseEntity<Void> changePassword(@RequestBody @Valid PwdRequest pwdRequest) {
         userService.editPwd(pwdRequest);
         return new ResponseEntity<>(HttpStatus.OK);
