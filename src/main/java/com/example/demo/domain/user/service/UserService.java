@@ -79,6 +79,13 @@ public class UserService {
     }
 
     @Transactional
+    public NameCheckRes checkNameIsExist(String name) {
+        NameCheckRes nameCheckRes = new NameCheckRes();
+        nameCheckRes.setIsExist(userRepository.existsByName(name));
+        return nameCheckRes;
+    }
+
+    @Transactional
     public NameCheckRes checkNameDuplicate(String name) {
         User currentUser = userUtil.currentUser();
         NameCheckRes nameCheckRes = new NameCheckRes();
