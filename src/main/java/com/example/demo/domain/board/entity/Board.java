@@ -9,10 +9,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -27,6 +24,7 @@ public class Board extends BaseTimeEntity {
     private Long boardId;
     private String author;
     private String title;
+    @Lob
     private String content;
     private String type;
     private String reqruit;

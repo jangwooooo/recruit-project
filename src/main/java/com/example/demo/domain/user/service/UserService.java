@@ -1,5 +1,6 @@
 package com.example.demo.domain.user.service;
 
+import com.example.demo.domain.board.entity.Board;
 import com.example.demo.domain.board.repository.BoardRepository;
 import com.example.demo.domain.user.presentation.dto.request.EditProfileReq;
 import com.example.demo.domain.user.presentation.dto.request.PwdRequest;
@@ -16,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Objects;
 
 @Service
