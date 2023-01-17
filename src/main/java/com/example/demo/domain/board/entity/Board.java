@@ -1,6 +1,7 @@
 package com.example.demo.domain.board.entity;
 
 
+import com.example.demo.domain.board.presentation.dto.reqeust.PostAndEditReq;
 import com.example.demo.global.entity.BaseTimeEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,4 +32,15 @@ public class Board extends BaseTimeEntity {
     private String contactType;
     private String contactUs;
     private LocalDate endDate;
+
+    public void update(PostAndEditReq req, String name) {
+        this.author = name;
+        this.title = req.getTitle();
+        this.content = req.getContent();
+        this.type = req.getType();
+        this.reqruit = req.getReqruit();
+        this.contactType = req.getContactType();
+        this.contactUs = req.getContactUs();
+        this.endDate = req.getEndDate();
+    }
 }

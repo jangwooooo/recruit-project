@@ -22,4 +22,10 @@ public class BoardController {
         boardService.post(req);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+
+    @PutMapping
+    public ResponseEntity<Void> editBoard(@RequestBody @Valid PostAndEditReq req) {
+        boardService.edit(req);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
