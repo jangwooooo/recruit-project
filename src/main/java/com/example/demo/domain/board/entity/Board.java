@@ -33,8 +33,7 @@ public class Board extends BaseTimeEntity {
     private String contactUs;
     private LocalDate endDate;
 
-    public void update(PostAndEditReq req, String name) {
-        this.author = name;
+    public void update(PostAndEditReq req) {
         this.title = req.getTitle();
         this.content = req.getContent();
         this.type = req.getType();

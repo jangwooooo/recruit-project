@@ -40,6 +40,6 @@ public class BoardService {
         User currentUser = userUtil.currentUser();
         Board board = boardRepository.findBoardByAuthor(currentUser.getName())
                 .orElseThrow(() -> new BoardNotFoundException("게시글을 찾을 수 없습니다."));
-        board.update(req, currentUser.getName());
+        board.update(req);
     }
 }
