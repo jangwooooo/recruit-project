@@ -1,5 +1,6 @@
 package com.example.demo.domain.user.presentation;
 
+import com.example.demo.domain.user.presentation.dto.request.EditProfileReq;
 import com.example.demo.domain.user.presentation.dto.request.PwdRequest;
 import com.example.demo.domain.user.presentation.dto.response.MyPageResponse;
 import com.example.demo.domain.user.presentation.dto.response.ProfileRes;
@@ -29,6 +30,12 @@ public class UserController {
     public ResponseEntity<Void> deleteUser(@RequestBody @Valid PwdRequest pwdRequest) {
         userService.deleteUser(pwdRequest);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping("/edit")
+    public ResponseEntity<Void> editProfile(@RequestBody @Valid EditProfileReq editProfileReq) {
+        userService.editProfile(editProfileReq);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping("/edit/pwd")

@@ -1,5 +1,6 @@
 package com.example.demo.domain.user.service;
 
+import com.example.demo.domain.user.presentation.dto.request.EditProfileReq;
 import com.example.demo.domain.user.presentation.dto.request.PwdRequest;
 import com.example.demo.domain.user.presentation.dto.response.MyPageResponse;
 import com.example.demo.domain.user.entity.User;
@@ -45,6 +46,14 @@ public class UserService {
             throw new PasswordWrongException("비밀번호가 올바르지 않습니다.");
         }
         userRepository.delete(user);
+    }
+
+    @Transactional
+    public void editProfile(EditProfileReq req) {
+        User currentUser = userUtil.currentUser();
+        User user = userRepository.findUserByEmail(currentUser.getEmail())
+                .orElseThrow(() -> new UserNotFoundException("유저를 찾을 수 없습니다."));
+        user.updateNameAndBio(req.getName(), req.getBio());
     }
 
     @Transactional

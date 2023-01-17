@@ -49,6 +49,11 @@ public class User implements UserDetails {
         this.password = password;
     }
 
+    public void updateNameAndBio(String name, String bio) {
+        this.name = name;
+        this.bio = bio;
+    }
+
     public void addUserAuthority() {
         this.role = Role.USER;
     }
