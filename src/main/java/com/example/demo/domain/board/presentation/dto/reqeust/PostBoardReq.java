@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostAndEditReq {
+public class PostBoardReq {
 
     @NotBlank
     private String title;
