@@ -2,6 +2,7 @@ package com.example.demo.domain.user.service;
 
 import com.example.demo.domain.board.entity.Board;
 import com.example.demo.domain.board.repository.BoardRepository;
+import com.example.demo.domain.board.service.BoardService;
 import com.example.demo.domain.user.presentation.dto.request.EditProfileReq;
 import com.example.demo.domain.user.presentation.dto.request.PwdRequest;
 import com.example.demo.domain.user.presentation.dto.response.MyPageResponse;
@@ -28,6 +29,7 @@ public class UserService {
     private final UserUtil userUtil;
     private final PasswordEncoder passwordEncoder;
     private final BoardRepository boardRepository;
+    private final BoardService boardService;
 
     @Transactional
     public MyPageResponse myPage() {
@@ -53,6 +55,10 @@ public class UserService {
         User currentUser = userUtil.currentUser();
         User user = userRepository.findUserByEmail(currentUser.getEmail())
                 .orElseThrow(() -> new UserNotFoundException("유저를 찾을 수 없습니다."));
+        List<Board> boardList = boardRepository.findBoardsByAuthor(user.getName());
+        for (Board board : boardList) {
+            board.updateAuthor(req.getName());
+        }
         user.updateNameAndBio(req.getName(), req.getBio());
     }
 

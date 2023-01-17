@@ -41,4 +41,8 @@ public class Board extends BaseTimeEntity {
         this.contactUs = req.getContactUs();
         this.endDate = req.getEndDate();
     }
+
+    public void updateAuthor(String name) {
+        this.author = name;
+    }
 }
