@@ -1,7 +1,7 @@
 package com.example.demo.domain.board.service;
 
 import com.example.demo.domain.board.entity.Board;
-import com.example.demo.domain.board.presentation.dto.reqeust.PostBoardReq;
+import com.example.demo.domain.board.presentation.dto.reqeust.PostAndEditReq;
 import com.example.demo.domain.board.repository.BoardRepository;
 import com.example.demo.domain.user.entity.User;
 import com.example.demo.global.util.UserUtil;
@@ -18,7 +18,7 @@ public class BoardService {
     private final UserUtil userUtil;
 
     @Transactional
-    public void post(PostBoardReq req) {
+    public void post(PostAndEditReq req) {
         User user = userUtil.currentUser();
         Board board = Board.builder()
                 .author(user.getName())

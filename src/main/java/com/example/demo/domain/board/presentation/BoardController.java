@@ -1,6 +1,6 @@
 package com.example.demo.domain.board.presentation;
 
-import com.example.demo.domain.board.presentation.dto.reqeust.PostBoardReq;
+import com.example.demo.domain.board.presentation.dto.reqeust.PostAndEditReq;
 import com.example.demo.domain.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,7 +18,7 @@ public class BoardController {
     private final BoardService boardService;
 
     @PostMapping
-    public ResponseEntity<Void> postBoard(@RequestBody @Valid PostBoardReq req) {
+    public ResponseEntity<Void> postBoard(@RequestBody @Valid PostAndEditReq req) {
         boardService.post(req);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
