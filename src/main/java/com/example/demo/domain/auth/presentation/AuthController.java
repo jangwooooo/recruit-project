@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-
+@CrossOrigin
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
@@ -21,14 +21,12 @@ public class AuthController {
 
     private final AuthService authService;
 
-    @CrossOrigin
     @PostMapping("/signup")
     public ResponseEntity<Void> signup(@RequestBody @Validated UserSignUpRequestDto signUpDto){
          authService.signUp(signUpDto);
          return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @CrossOrigin
     @PostMapping("/login")
     public ResponseEntity<UserSignInResponseDto> login(@RequestBody @Validated UserSignInRequestDto signInDto) {
         UserSignInResponseDto data = authService.login(signInDto);
