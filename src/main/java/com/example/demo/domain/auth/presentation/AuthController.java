@@ -3,6 +3,7 @@ package com.example.demo.domain.auth.presentation;
 
 import com.example.demo.domain.auth.presentation.dto.request.UserSignInRequestDto;
 import com.example.demo.domain.auth.presentation.dto.request.UserSignUpRequestDto;
+import com.example.demo.domain.auth.presentation.dto.response.NameIsExistRes;
 import com.example.demo.domain.auth.presentation.dto.response.UserSignInResponseDto;
 import com.example.demo.domain.auth.service.AuthService;
 import com.example.demo.domain.user.presentation.dto.response.NameIsDuplicateRes;
@@ -31,9 +32,9 @@ public class AuthController {
     }
 
     @GetMapping("/check")
-    public ResponseEntity<NameIsDuplicateRes> checkSignupNameDuplicate(@RequestParam String name) {
-        NameIsDuplicateRes isExist = userService.checkNameIsExist(name);
-        return new ResponseEntity<>(isExist, HttpStatus.OK);
+    public ResponseEntity<NameIsExistRes> checkNameIsExist(@RequestParam String name) {
+        NameIsExistRes data = userService.checkNameIsExist(name);
+        return new ResponseEntity<>(data, HttpStatus.OK);
     }
 
     @PostMapping("/login")

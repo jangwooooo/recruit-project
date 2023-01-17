@@ -1,5 +1,6 @@
 package com.example.demo.domain.user.service;
 
+import com.example.demo.domain.auth.presentation.dto.response.NameIsExistRes;
 import com.example.demo.domain.user.presentation.dto.request.EditProfileReq;
 import com.example.demo.domain.user.presentation.dto.request.PwdRequest;
 import com.example.demo.domain.user.presentation.dto.response.MyPageResponse;
@@ -79,10 +80,10 @@ public class UserService {
     }
 
     @Transactional
-    public NameIsDuplicateRes checkNameIsExist(String name) {
-        NameIsDuplicateRes nameCheckRes = new NameIsDuplicateRes();
-        nameCheckRes.setIsDuplicate(userRepository.existsByName(name));
-        return nameCheckRes;
+    public NameIsExistRes checkNameIsExist(String name) {
+        NameIsExistRes nameIsExistRes = new NameIsExistRes();
+        nameIsExistRes.setIsExist(userRepository.existsByName(name));
+        return nameIsExistRes;
     }
 
     @Transactional
