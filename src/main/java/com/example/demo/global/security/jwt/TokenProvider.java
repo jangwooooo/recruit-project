@@ -6,14 +6,17 @@ import com.example.demo.global.security.auth.AuthDetailsService;
 import com.example.demo.global.security.jwt.properties.JwtProperties;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.security.SignatureException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.time.ZonedDateTime;
@@ -29,6 +32,9 @@ public class TokenProvider {
     private final JwtProperties jwtProperties;
     private final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 120; // 2시간
     private final long REFRESH_TOKEN_EXPIRE_TIME = ACCESS_TOKEN_EXPIRE_TIME * 12 * 7; // 일주일
+//
+//    @Value("${security.jwt.token.secretKey}")
+//    private String secretKey;
 
 
     @AllArgsConstructor
@@ -65,7 +71,7 @@ public class TokenProvider {
     }
 
     // 모든 Claims 추출 ( Payload에 들어가는 값은 Claims 이라고 부른다 )
-    public Claims extractAllClaims(String token, String secret) {
+    public Claims extractAllClaims(String token, String secret){
         token = token.replace("Bearer ", "");
         try {
             return Jwts.parserBuilder()
@@ -76,12 +82,12 @@ public class TokenProvider {
         } catch (ExpiredJwtException e) {
             throw new TokenExpirationException("토큰이 만료되었습니다");
         } catch (JwtException e) {
-            throw new TokenNotValidException("토큰이 올바르지 않습니다.");
+            throw new TokenNotValidException("토큰이 유효하지 않습니다.");
         }
-
     }
+
     // 토큰 값으로 유저 이메일 조회
-    public String getUserEmail(String token, String secret) {
+    public String getUserEmail(String token, String secret){
         return extractAllClaims(token, secret).get(TokenClaimName.USER_EMAIL.value, String.class);
     }
 

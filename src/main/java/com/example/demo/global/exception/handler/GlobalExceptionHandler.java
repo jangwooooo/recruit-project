@@ -12,6 +12,7 @@ import com.example.demo.global.exception.ErrorCode;
 import com.example.demo.global.exception.ErrorResponse;
 import com.example.demo.global.exception.exceptionCollection.TokenExpirationException;
 import com.example.demo.global.exception.exceptionCollection.TokenNotValidException;
+import io.jsonwebtoken.security.SignatureException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -119,7 +120,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(TokenNotValidException.class)
-    public ResponseEntity<ErrorResponse> handleTokenNotValidException(HttpServletRequest request, TokenNotValidException exception) {
+    public ResponseEntity<ErrorResponse> TokenNotValidException(HttpServletRequest request, TokenNotValidException exception) {
         log.warn("TokenNotValidException 발생!!! url:{}, trace:{}", request.getRequestURI(), exception.getStackTrace());
         ErrorResponse errorResponse = new ErrorResponse(exception.getErrorCode().getMessage(), exception.getErrorCode().getStatus());
         return new ResponseEntity<>(errorResponse, HttpStatus.valueOf(exception.getErrorCode().getStatus()));
