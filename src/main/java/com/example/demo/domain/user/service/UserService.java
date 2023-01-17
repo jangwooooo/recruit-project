@@ -6,6 +6,7 @@ import com.example.demo.domain.user.presentation.dto.response.MyPageResponse;
 import com.example.demo.domain.user.entity.User;
 import com.example.demo.domain.user.exception.PasswordWrongException;
 import com.example.demo.domain.user.exception.UserNotFoundException;
+import com.example.demo.domain.user.presentation.dto.response.NameCheckRes;
 import com.example.demo.domain.user.presentation.dto.response.ProfileRes;
 import com.example.demo.domain.user.repository.UserRepository;
 import com.example.demo.global.util.UserUtil;
@@ -75,5 +76,17 @@ public class UserService {
                 .name(user.getName())
                 .bio(user.getBio())
                 .build();
+    }
+
+    @Transactional
+    public NameCheckRes checkNameDuplicate(String name) {
+        User currentUser = userUtil.currentUser();
+        NameCheckRes nameCheckRes = new NameCheckRes();
+        if(!Objects.equals(currentUser.getName(), name)){
+            nameCheckRes.setExist(userRepository.existsByName(name));
+        } else {
+            nameCheckRes.setExist(false);
+        }
+        return nameCheckRes;
     }
 }
