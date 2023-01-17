@@ -1,5 +1,6 @@
 package com.example.demo.domain.user.service;
 
+import com.example.demo.domain.board.repository.BoardRepository;
 import com.example.demo.domain.user.presentation.dto.request.EditProfileReq;
 import com.example.demo.domain.user.presentation.dto.request.PwdRequest;
 import com.example.demo.domain.user.presentation.dto.response.MyPageResponse;
@@ -24,6 +25,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserUtil userUtil;
     private final PasswordEncoder passwordEncoder;
+    private final BoardRepository boardRepository;
 
     @Transactional
     public MyPageResponse myPage() {
