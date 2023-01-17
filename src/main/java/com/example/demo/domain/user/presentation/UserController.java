@@ -33,7 +33,7 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @PatchMapping("/edit")
+    @PutMapping("/edit")
     public ResponseEntity<Void> editProfile(@RequestBody @Valid EditProfileReq editProfileReq) {
         userService.editProfile(editProfileReq);
         return new ResponseEntity<>(HttpStatus.OK);
