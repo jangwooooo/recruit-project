@@ -1,18 +1,16 @@
 package com.example.demo.domain.board.presentation;
 
-import com.example.demo.domain.board.entity.Board;
 import com.example.demo.domain.board.presentation.dto.reqeust.EditBoardReq;
 import com.example.demo.domain.board.presentation.dto.reqeust.PostBoardReq;
+import com.example.demo.domain.board.presentation.dto.response.BoardListResponse;
 import com.example.demo.domain.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Slice;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -41,8 +39,8 @@ public class BoardController {
     }
 
     @GetMapping
-    public ResponseEntity<Slice<Board>> getBoardList(@RequestParam Long lastBoardId, @RequestParam int size, @RequestParam String type) {
-        Slice<Board> boardListRes = boardService.fetchBoardPagesBy(lastBoardId, size, type);
+    public ResponseEntity<Slice<BoardListResponse>> getBoardList(@RequestParam Long lastBoardId, @RequestParam int size, @RequestParam String type) {
+        Slice<BoardListResponse> boardListRes = boardService.fetchBoardPagesBy(lastBoardId, size, type);
         return new ResponseEntity<>(boardListRes, HttpStatus.OK);
     }
 }
