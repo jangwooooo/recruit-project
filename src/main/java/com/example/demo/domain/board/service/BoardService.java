@@ -4,7 +4,7 @@ import com.example.demo.domain.board.entity.Board;
 import com.example.demo.domain.board.exception.BoardNotFoundException;
 import com.example.demo.domain.board.presentation.dto.reqeust.EditBoardReq;
 import com.example.demo.domain.board.presentation.dto.reqeust.PostBoardReq;
-import com.example.demo.domain.board.presentation.dto.response.BoardListResponse;
+import com.example.demo.domain.board.presentation.dto.response.BoardResponse;
 import com.example.demo.domain.board.repository.BoardRepository;
 import com.example.demo.domain.user.entity.User;
 import com.example.demo.global.exception.exceptionCollection.TokenNotValidException;
@@ -62,7 +62,7 @@ public class BoardService {
     }
 
     @Transactional
-    public Slice<BoardListResponse> fetchBoardPagesBy(Long lastBoardId, int size, String type) {
+    public Slice<BoardResponse> fetchBoardPagesBy(Long lastBoardId, int size, String type) {
         PageRequest pageRequest = PageRequest.of(0, size); // 페이지네이션을 위한 PageRequest, 페이지는 0으로 고정한다.
         Slice<Board> boards;
         if(type.length()==0){
@@ -71,8 +71,8 @@ public class BoardService {
             boards = boardRepository.findAllByBoardIdLessThanAndTypeOrderByBoardIdDesc(lastBoardId, pageRequest, type);
         }
 
-        BoardListResponse boardListResponse = new BoardListResponse();
-        Slice<BoardListResponse> responses = boardListResponse.toDtoList(boards);
+        BoardResponse boardListResponse = new BoardResponse();
+        Slice<BoardResponse> responses = boardListResponse.toDtoList(boards);
 
         return responses;
     }

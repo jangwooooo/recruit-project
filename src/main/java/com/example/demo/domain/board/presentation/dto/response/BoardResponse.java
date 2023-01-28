@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BoardListResponse {
+public class BoardResponse {
 
     private Long boardId;
     private String author;
@@ -24,8 +24,8 @@ public class BoardListResponse {
     private LocalDate endDate;
     private LocalDate createdAt;
 
-    public Slice<BoardListResponse> toDtoList(Slice<Board> boardList){
-        Slice<BoardListResponse> boardDtoList = boardList.map(m -> BoardListResponse.builder()
+    public Slice<BoardResponse> toDtoList(Slice<Board> boardList){
+        Slice<BoardResponse> boardDtoList = boardList.map(m -> BoardResponse.builder()
                 .boardId(m.getBoardId())
                 .type(m.getType())
                 .title(m.getTitle())
