@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -39,7 +40,8 @@ public class BoardController {
     }
 
     @GetMapping
-    public Page<BoardListRes> getBoardList(@RequestParam String sort, @RequestParam String type , @RequestParam int page, @RequestParam int size) {
-        return boardService.getPosts(sort, type, page, size);
+    public ResponseEntity<List<BoardListRes>> getBoardList(@RequestParam Long lastBoardId, @RequestParam int size) {
+        List<BoardListRes> boardListRes = boardService.fetchBoardPagesBy(lastBoardId, size);
+        return new ResponseEntity<>(boardListRes, HttpStatus.OK);
     }
 }
