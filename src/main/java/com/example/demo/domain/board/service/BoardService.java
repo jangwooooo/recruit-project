@@ -5,6 +5,7 @@ import com.example.demo.domain.board.exception.BoardNotFoundException;
 import com.example.demo.domain.board.presentation.dto.reqeust.EditBoardReq;
 import com.example.demo.domain.board.presentation.dto.reqeust.PostBoardReq;
 import com.example.demo.domain.board.presentation.dto.response.BoardListResponse;
+import com.example.demo.domain.board.presentation.dto.response.BoardResponse;
 import com.example.demo.domain.board.repository.BoardRepository;
 import com.example.demo.domain.user.entity.User;
 import com.example.demo.global.exception.exceptionCollection.TokenNotValidException;
@@ -78,5 +79,27 @@ public class BoardService {
         Slice<BoardListResponse> responses = boardListResponse.toDtoList(boards);
 
         return responses;
+    }
+
+    @Transactional
+    public BoardResponse getBoardInfo(Long boardId) {
+        User user = userUtil.currentUser();
+        Board board = boardRepository.findById(boardId)
+                .orElseThrow(() -> new BoardNotFoundException("게시글을 찾을 수 없습니다."));
+        Boolean authority = false;
+        if (Objects.equals(user.getName(), board.getAuthor())) {
+            authority = true;
+        }
+        return BoardResponse.builder()
+                .boardId(board.getBoardId())
+                .category(board.getCategory())
+                .title(board.getTitle())
+                .content(board.getContent())
+                .author(board.getAuthor())
+                .recruit(board.getRecruit())
+                .endDate(board.getEndDate())
+                .createdAt(board.getCreatedAt())
+                .authority(authority)
+                .build();
     }
 }
