@@ -2,8 +2,10 @@ package com.example.demo.domain.board.presentation;
 
 import com.example.demo.domain.board.presentation.dto.reqeust.EditBoardReq;
 import com.example.demo.domain.board.presentation.dto.reqeust.PostBoardReq;
+import com.example.demo.domain.board.presentation.dto.response.BoardListRes;
 import com.example.demo.domain.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,5 +36,10 @@ public class BoardController {
     public ResponseEntity<Void> deleteBoard(@PathVariable Long boardId) {
         boardService.delete(boardId);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping
+    public Page<BoardListRes> getBoardList(@RequestParam String sort, @RequestParam String type , @RequestParam int page, @RequestParam int size) {
+        return boardService.getPosts(sort, type, page, size);
     }
 }
