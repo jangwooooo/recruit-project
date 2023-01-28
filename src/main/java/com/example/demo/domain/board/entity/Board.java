@@ -25,7 +25,7 @@ public class Board extends BaseTimeEntity {
     private String title;
     @Lob
     private String content;
-    private String type;
+    private String category;
     private String reqruit;
     private String contactType;
     private String contactUs;
@@ -34,7 +34,7 @@ public class Board extends BaseTimeEntity {
     public void update(EditBoardReq req) {
         this.title = req.getTitle();
         this.content = req.getContent();
-        this.type = req.getType();
+        this.category = req.getCategory();
         this.reqruit = req.getReqruit();
         this.contactType = req.getContactType();
         this.contactUs = req.getContactUs();

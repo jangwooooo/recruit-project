@@ -20,7 +20,7 @@ public class EditBoardReq {
     @NotBlank
     private String content;
     @NotBlank
-    private String type;
+    private String category;
     @NotBlank
     private String reqruit;
     @NotBlank

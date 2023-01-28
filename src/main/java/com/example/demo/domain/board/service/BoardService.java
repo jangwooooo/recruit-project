@@ -30,7 +30,7 @@ public class BoardService {
                 .author(user.getName())
                 .title(req.getTitle())
                 .content(req.getContent())
-                .type(req.getType())
+                .category(req.getType())
                 .reqruit(req.getReqruit())
                 .contactType(req.getContactType())
                 .contactUs(req.getContactUs())
@@ -62,16 +62,16 @@ public class BoardService {
     }
 
     @Transactional
-    public Slice<BoardResponse> fetchBoardPagesBy(Long lastBoardId, Integer size, String type) {
+    public Slice<BoardResponse> fetchBoardPagesBy(Long lastBoardId, Integer size, String category) {
         PageRequest pageRequest = PageRequest.of(0, size); // 페이지네이션을 위한 PageRequest, 페이지는 0으로 고정한다.
         Slice<Board> boards;
         if(lastBoardId==null){
             lastBoardId = boardRepository.findFirstByOrderByBoardIdDesc().getBoardId()+1;
         }
-        if(type.length()==0){
+        if(category.length()==0){
             boards = boardRepository.findAllByBoardIdLessThanOrderByBoardIdDesc(lastBoardId, pageRequest);
         } else {
-            boards = boardRepository.findAllByBoardIdLessThanAndTypeOrderByBoardIdDesc(lastBoardId, pageRequest, type);
+            boards = boardRepository.findAllByBoardIdLessThanAndCategoryOrderByBoardIdDesc(lastBoardId, pageRequest, category);
         }
 
         BoardResponse boardListResponse = new BoardResponse();

@@ -10,7 +10,7 @@ import java.util.List;
 public interface BoardRepository extends JpaRepository<Board, Long> {
 
     List<Board> findBoardsByAuthor(String name);
-    Slice<Board> findAllByBoardIdLessThanAndTypeOrderByBoardIdDesc(Long lastBoardId, PageRequest pageRequest, String type);
+    Slice<Board> findAllByBoardIdLessThanAndCategoryOrderByBoardIdDesc(Long lastBoardId, PageRequest pageRequest, String category);
     Slice<Board> findAllByBoardIdLessThanOrderByBoardIdDesc(Long lastBoardId, PageRequest pageRequest);
     Board findFirstByOrderByBoardIdDesc();
 }

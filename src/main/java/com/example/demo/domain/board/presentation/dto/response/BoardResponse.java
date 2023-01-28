@@ -19,7 +19,7 @@ public class BoardResponse {
     private String author;
     private String title;
     private String content;
-    private String type;
+    private String category;
     private String reqruit;
     private LocalDate endDate;
     private LocalDate createdAt;
@@ -27,7 +27,7 @@ public class BoardResponse {
     public Slice<BoardResponse> toDtoList(Slice<Board> boardList){
         Slice<BoardResponse> boardDtoList = boardList.map(m -> BoardResponse.builder()
                 .boardId(m.getBoardId())
-                .type(m.getType())
+                .category(m.getCategory())
                 .title(m.getTitle())
                 .content(m.getContent())
                 .author(m.getAuthor())
