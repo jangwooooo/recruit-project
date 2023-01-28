@@ -1,11 +1,12 @@
 package com.example.demo.domain.board.presentation;
 
+import com.example.demo.domain.board.entity.Board;
 import com.example.demo.domain.board.presentation.dto.reqeust.EditBoardReq;
 import com.example.demo.domain.board.presentation.dto.reqeust.PostBoardReq;
-import com.example.demo.domain.board.presentation.dto.response.BoardListRes;
 import com.example.demo.domain.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Slice;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,8 +41,8 @@ public class BoardController {
     }
 
     @GetMapping
-    public ResponseEntity<List<BoardListRes>> getBoardList(@RequestParam Long lastBoardId, @RequestParam int size) {
-        List<BoardListRes> boardListRes = boardService.fetchBoardPagesBy(lastBoardId, size);
+    public ResponseEntity<Slice<Board>> getBoardList(@RequestParam Long lastBoardId, @RequestParam int size) {
+        Slice<Board> boardListRes = boardService.fetchBoardPagesBy(lastBoardId, size);
         return new ResponseEntity<>(boardListRes, HttpStatus.OK);
     }
 }
