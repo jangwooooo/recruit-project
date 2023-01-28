@@ -22,4 +22,8 @@ public class BoardResponse {
     private LocalDate endDate;
     private LocalDate createdAt;
     private Boolean authority;
+
+    public void updateAuthority(Boolean authority) {
+        this.authority = authority;
+    }
 }
