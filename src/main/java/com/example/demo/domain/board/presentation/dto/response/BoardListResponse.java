@@ -18,7 +18,6 @@ public class BoardListResponse {
     private Long boardId;
     private String author;
     private String title;
-    private String content;
     private String category;
     private String recruit;
     private LocalDate endDate;
@@ -29,7 +28,6 @@ public class BoardListResponse {
                 .boardId(m.getBoardId())
                 .category(m.getCategory())
                 .title(m.getTitle())
-                .content(m.getContent())
                 .author(m.getAuthor())
                 .recruit(m.getRecruit())
                 .endDate(m.getEndDate())
