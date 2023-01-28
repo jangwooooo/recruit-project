@@ -47,4 +47,14 @@ public class BoardService {
         }
         board.update(req);
     }
+
+    public void delete(Long boardId) {
+        User user = userUtil.currentUser();
+        Board board = boardRepository.findById(boardId)
+                .orElseThrow(() -> new BoardNotFoundException("게시글을 찾을 수 없습니다."));
+        if (!Objects.equals(user.getName(), board.getAuthor())) {
+            throw new TokenNotValidException("권한이 없는 사용자입니다.");
+        }
+        boardRepository.delete(board);
+    }
 }
