@@ -4,12 +4,17 @@ import com.example.demo.domain.board.entity.Board;
 import com.example.demo.domain.board.exception.BoardNotFoundException;
 import com.example.demo.domain.board.presentation.dto.reqeust.EditBoardReq;
 import com.example.demo.domain.board.presentation.dto.reqeust.PostBoardReq;
+import com.example.demo.domain.board.presentation.dto.response.BoardListRes;
 import com.example.demo.domain.board.repository.BoardRepository;
 import com.example.demo.domain.user.entity.User;
 import com.example.demo.global.exception.exceptionCollection.TokenNotValidException;
 import com.example.demo.global.util.UserUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.transaction.Transactional;
 import java.util.Objects;
@@ -57,5 +62,11 @@ public class BoardService {
             throw new TokenNotValidException("권한이 없는 사용자입니다.");
         }
         boardRepository.delete(board);
+    }
+
+    @Transactional
+    public Page<BoardListRes> getPosts(@RequestParam String sort, @RequestParam String type, @RequestParam int page, @RequestParam int size) {
+        Pageable pageable = PageRequest.of(page,size);
+        return boardRepository.findAllByCategoryOrderBySort(sort, type, pageable);
     }
 }
