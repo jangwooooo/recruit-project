@@ -21,4 +21,5 @@ public class BoardResponse {
     private String recruit;
     private LocalDate endDate;
     private LocalDate createdAt;
+    private Boolean authority;
 }
