@@ -22,7 +22,7 @@ public class EditBoardReq {
     @NotBlank
     private String category;
     @NotBlank
-    private String reqruit;
+    private String recruit;
     @NotBlank
     private String contactType;
     @NotBlank

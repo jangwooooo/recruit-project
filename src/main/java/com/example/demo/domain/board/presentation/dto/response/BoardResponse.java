@@ -20,7 +20,7 @@ public class BoardResponse {
     private String title;
     private String content;
     private String category;
-    private String reqruit;
+    private String recruit;
     private LocalDate endDate;
     private LocalDate createdAt;
 
@@ -31,7 +31,7 @@ public class BoardResponse {
                 .title(m.getTitle())
                 .content(m.getContent())
                 .author(m.getAuthor())
-                .reqruit(m.getReqruit())
+                .recruit(m.getRecruit())
                 .endDate(m.getEndDate())
                 .createdAt(m.getCreatedAt())
                 .build());

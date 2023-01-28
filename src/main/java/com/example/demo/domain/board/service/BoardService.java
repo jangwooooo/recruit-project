@@ -31,7 +31,7 @@ public class BoardService {
                 .title(req.getTitle())
                 .content(req.getContent())
                 .category(req.getType())
-                .reqruit(req.getReqruit())
+                .recruit(req.getReqruit())
                 .contactType(req.getContactType())
                 .contactUs(req.getContactUs())
                 .endDate(req.getEndDate())

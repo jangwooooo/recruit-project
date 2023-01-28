@@ -26,7 +26,7 @@ public class Board extends BaseTimeEntity {
     @Lob
     private String content;
     private String category;
-    private String reqruit;
+    private String recruit;
     private String contactType;
     private String contactUs;
     private LocalDate endDate;
@@ -35,7 +35,7 @@ public class Board extends BaseTimeEntity {
         this.title = req.getTitle();
         this.content = req.getContent();
         this.category = req.getCategory();
-        this.reqruit = req.getReqruit();
+        this.recruit = req.getRecruit();
         this.contactType = req.getContactType();
         this.contactUs = req.getContactUs();
         this.endDate = req.getEndDate();
