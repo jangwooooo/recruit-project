@@ -48,6 +48,7 @@ public class BoardService {
         board.update(req);
     }
 
+    @Transactional
     public void delete(Long boardId) {
         User user = userUtil.currentUser();
         Board board = boardRepository.findById(boardId)
