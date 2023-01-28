@@ -12,5 +12,6 @@ import java.util.Optional;
 public interface BoardRepository extends JpaRepository<Board, Long> {
 
     List<Board> findBoardsByAuthor(String name);
+    Slice<Board> findAllByBoardIdLessThanAndTypeOrderByBoardIdDesc(Long lastBoardId, PageRequest pageRequest, String type);
     Slice<Board> findAllByBoardIdLessThanOrderByBoardIdDesc(Long lastBoardId, PageRequest pageRequest);
 }

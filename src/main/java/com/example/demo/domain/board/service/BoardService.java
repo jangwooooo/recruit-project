@@ -66,12 +66,15 @@ public class BoardService {
     }
 
     @Transactional
-    public Slice<Board> fetchBoardPagesBy(Long lastBoardId, int size) {
+    public Slice<Board> fetchBoardPagesBy(Long lastBoardId, int size, String type) {
         PageRequest pageRequest = PageRequest.of(0, size); // 페이지네이션을 위한 PageRequest, 페이지는 0으로 고정한다.
-        Slice<Board> boards = boardRepository.findAllByBoardIdLessThanOrderByBoardIdDesc(lastBoardId, pageRequest);
-        //Page<Article> articles = fetchPages(lastBoardId, size); // followers의 게시물들을 페이지네이션해서 가져온다.
+        Slice<Board> boards;
+        if(type.length()==0){
+            boards = boardRepository.findAllByBoardIdLessThanOrderByBoardIdDesc(lastBoardId, pageRequest);
+        } else {
+            boards = boardRepository.findAllByBoardIdLessThanAndTypeOrderByBoardIdDesc(lastBoardId, pageRequest, type);
+        }
 
-//        return ArticleAssembler.toDtos(articles.getContent(), loginMember);
         return boards;
     }
 }

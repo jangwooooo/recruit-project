@@ -41,8 +41,8 @@ public class BoardController {
     }
 
     @GetMapping
-    public ResponseEntity<Slice<Board>> getBoardList(@RequestParam Long lastBoardId, @RequestParam int size) {
-        Slice<Board> boardListRes = boardService.fetchBoardPagesBy(lastBoardId, size);
+    public ResponseEntity<Slice<Board>> getBoardList(@RequestParam Long lastBoardId, @RequestParam int size, @RequestParam String type) {
+        Slice<Board> boardListRes = boardService.fetchBoardPagesBy(lastBoardId, size, type);
         return new ResponseEntity<>(boardListRes, HttpStatus.OK);
     }
 }
