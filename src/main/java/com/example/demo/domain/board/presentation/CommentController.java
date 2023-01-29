@@ -1,5 +1,6 @@
 package com.example.demo.domain.board.presentation;
 
+import com.example.demo.domain.board.presentation.dto.reqeust.EditCommentRequest;
 import com.example.demo.domain.board.presentation.dto.reqeust.PostCommentRequest;
 import com.example.demo.domain.board.presentation.dto.response.CommentResponse;
 import com.example.demo.domain.board.service.CommentService;
@@ -30,5 +31,11 @@ public class CommentController {
     public ResponseEntity<List<CommentResponse>> getComments(@RequestParam long boardId) {
         List<CommentResponse> responseList = commentService.getComments(boardId);
         return new ResponseEntity<>(responseList,HttpStatus.OK);
+    }
+
+    @PatchMapping
+    public ResponseEntity<Void> edit(@RequestBody EditCommentRequest request) {
+        commentService.edit(request);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
