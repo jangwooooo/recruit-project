@@ -1,6 +1,7 @@
 package com.example.demo.domain.board.service;
 
 import com.example.demo.domain.board.repository.CommentRepository;
+import com.example.demo.global.util.UserUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -9,4 +10,5 @@ import org.springframework.stereotype.Service;
 public class CommentService {
 
     private final CommentRepository commentRepository;
+    private final UserUtil userUtil;
 }
