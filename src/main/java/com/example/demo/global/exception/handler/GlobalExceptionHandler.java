@@ -2,6 +2,7 @@ package com.example.demo.global.exception.handler;
 
 import com.example.demo.domain.auth.exception.*;
 import com.example.demo.domain.board.exception.BoardNotFoundException;
+import com.example.demo.domain.board.exception.CommentNotFound;
 import com.example.demo.domain.email.exception.AuthCodeExpiredException;
 import com.example.demo.domain.email.exception.AuthCodeMismatchException;
 import com.example.demo.domain.email.exception.ManyRequestEmailAuthException;
@@ -129,6 +130,13 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BoardNotFoundException.class)
     public ResponseEntity<ErrorResponse> BoardNotFoundException( BoardNotFoundException exception,HttpServletRequest request) {
         log.warn("BoardNotFoundException 발생!!! url:{}, trace:{}", request.getRequestURI(), exception.getStackTrace());
+        ErrorResponse errorResponse = new ErrorResponse(exception.getErrorCode().getMessage(), exception.getErrorCode().getStatus());
+        return new ResponseEntity<>(errorResponse, HttpStatus.valueOf(exception.getErrorCode().getStatus()));
+    }
+
+    @ExceptionHandler(CommentNotFound.class)
+    public ResponseEntity<ErrorResponse> CommentNotFound( CommentNotFound exception,HttpServletRequest request) {
+        log.warn("CommentNotFound 발생!!! url:{}, trace:{}", request.getRequestURI(), exception.getStackTrace());
         ErrorResponse errorResponse = new ErrorResponse(exception.getErrorCode().getMessage(), exception.getErrorCode().getStatus());
         return new ResponseEntity<>(errorResponse, HttpStatus.valueOf(exception.getErrorCode().getStatus()));
     }
