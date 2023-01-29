@@ -8,4 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PostCommentRequest {
+
+    private Long boardId;
+    private String content;
 }
