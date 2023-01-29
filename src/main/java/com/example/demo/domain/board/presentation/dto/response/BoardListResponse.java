@@ -23,6 +23,16 @@ public class BoardListResponse {
     private LocalDate endDate;
     private LocalDate createdAt;
 
+    public BoardListResponse(Board board) {
+        this.boardId = board.getBoardId();
+        this.author = board.getAuthor();
+        this.title = board.getTitle();
+        this.category = board.getCategory();
+        this.recruit = board.getRecruit();
+        this.endDate = board.getEndDate();
+        this.createdAt = board.getCreatedAt();
+    }
+
     public Slice<BoardListResponse> toDtoList(Slice<Board> boardList){
         Slice<BoardListResponse> boardDtoList = boardList.map(m -> BoardListResponse.builder()
                 .boardId(m.getBoardId())

@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -53,8 +54,8 @@ public class UserController {
     }
 
     @GetMapping("/my-board")
-    public ResponseEntity<Slice<BoardListResponse>> myBoard() {
-        Slice<BoardListResponse> responses = userService.getMyBoard();
+    public ResponseEntity<List<BoardListResponse>> myBoard() {
+        List<BoardListResponse> responses = userService.getMyBoard();
         return new ResponseEntity<>(responses, HttpStatus.OK);
     }
 }

@@ -1,6 +1,7 @@
 package com.example.demo.domain.user.service;
 
 import com.example.demo.domain.board.entity.Board;
+import com.example.demo.domain.board.presentation.dto.response.BoardListResponse;
 import com.example.demo.domain.board.repository.BoardRepository;
 import com.example.demo.domain.board.service.BoardService;
 import com.example.demo.domain.user.exception.NameAlreadyExistException;
@@ -14,12 +15,15 @@ import com.example.demo.domain.user.presentation.dto.response.ProfileRes;
 import com.example.demo.domain.user.repository.UserRepository;
 import com.example.demo.global.util.UserUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Slice;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -86,5 +90,13 @@ public class UserService {
                 .name(user.getName())
                 .bio(user.getBio())
                 .build();
+    }
+
+    @Transactional
+    public List<BoardListResponse> getMyBoard() {
+        User user = userUtil.currentUser();
+        return boardRepository.findBoardsByAuthor(user.getName()).stream()
+                .map(BoardListResponse::new)
+                .collect(Collectors.toList());
     }
 }
