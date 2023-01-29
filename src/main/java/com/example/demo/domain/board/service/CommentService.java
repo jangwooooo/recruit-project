@@ -2,6 +2,7 @@ package com.example.demo.domain.board.service;
 
 import com.example.demo.domain.board.entity.Comment;
 import com.example.demo.domain.board.presentation.dto.reqeust.PostCommentRequest;
+import com.example.demo.domain.board.presentation.dto.response.BoardListResponse;
 import com.example.demo.domain.board.presentation.dto.response.CommentResponse;
 import com.example.demo.domain.board.repository.CommentRepository;
 import com.example.demo.domain.user.entity.User;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -29,5 +31,12 @@ public class CommentService {
                 .build();
 
         commentRepository.save(comment);
+    }
+
+    @Transactional
+    public List<CommentResponse> getComments(Long boardId) {
+        return commentRepository.findCommentsByBoardId(boardId).stream()
+                .map(CommentResponse::new)
+                .collect(Collectors.toList());
     }
 }

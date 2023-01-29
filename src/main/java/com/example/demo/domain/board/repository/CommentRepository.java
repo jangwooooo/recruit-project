@@ -3,9 +3,9 @@ package com.example.demo.domain.board.repository;
 import com.example.demo.domain.board.entity.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Optional;
+import java.util.List;
 
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 
-    Optional<Comment> findCommentsByBoardId(Long boardId);
+    List<Comment> findCommentsByBoardId(Long boardId);
 }
