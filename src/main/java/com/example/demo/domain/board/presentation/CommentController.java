@@ -27,7 +27,7 @@ public class CommentController {
 
     @GetMapping
     public ResponseEntity<List<CommentResponse>> getComments(@RequestParam Long boardId) {
-        List<CommentResponse> responseList = commentService.get(boardId);
+        List<CommentResponse> responseList = commentService.getComments(boardId);
         return new ResponseEntity<>(responseList,HttpStatus.OK);
     }
 }
