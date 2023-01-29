@@ -52,7 +52,7 @@ public class UserController {
         return new ResponseEntity<>(data, HttpStatus.OK);
     }
 
-    @GetMapping("/my_board")
+    @GetMapping("/my-board")
     public ResponseEntity<Slice<BoardListResponse>> myBoard() {
         Slice<BoardListResponse> responses = userService.getMyBoard();
         return new ResponseEntity<>(responses, HttpStatus.OK);
