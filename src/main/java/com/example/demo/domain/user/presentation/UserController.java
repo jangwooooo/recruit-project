@@ -1,11 +1,13 @@
 package com.example.demo.domain.user.presentation;
 
+import com.example.demo.domain.board.presentation.dto.response.BoardListResponse;
 import com.example.demo.domain.user.presentation.dto.request.EditProfileReq;
 import com.example.demo.domain.user.presentation.dto.request.PwdRequest;
 import com.example.demo.domain.user.presentation.dto.response.MyPageResponse;
 import com.example.demo.domain.user.presentation.dto.response.ProfileRes;
 import com.example.demo.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Slice;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -48,5 +50,11 @@ public class UserController {
     public ResponseEntity<ProfileRes> profile(@RequestParam String name) {
         ProfileRes data = userService.profile(name);
         return new ResponseEntity<>(data, HttpStatus.OK);
+    }
+
+    @GetMapping("/my_board")
+    public ResponseEntity<Slice<BoardListResponse>> myBoard() {
+        Slice<BoardListResponse> responses = userService.getMyBoard();
+        return new ResponseEntity<>(responses, HttpStatus.OK);
     }
 }
