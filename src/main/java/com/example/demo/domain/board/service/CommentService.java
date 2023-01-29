@@ -2,6 +2,7 @@ package com.example.demo.domain.board.service;
 
 import com.example.demo.domain.board.entity.Comment;
 import com.example.demo.domain.board.exception.BoardNotFoundException;
+import com.example.demo.domain.board.presentation.dto.reqeust.EditCommentRequest;
 import com.example.demo.domain.board.presentation.dto.reqeust.PostCommentRequest;
 import com.example.demo.domain.board.presentation.dto.response.BoardListResponse;
 import com.example.demo.domain.board.presentation.dto.response.CommentResponse;
