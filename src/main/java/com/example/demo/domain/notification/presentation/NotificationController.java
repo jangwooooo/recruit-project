@@ -28,4 +28,10 @@ public class NotificationController {
         notificationService.read(notificationId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @DeleteMapping("/{notificationId}")
+    public ResponseEntity<Void> deleteNotification(@PathVariable Long notificationId) {
+        notificationService.delete(notificationId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
