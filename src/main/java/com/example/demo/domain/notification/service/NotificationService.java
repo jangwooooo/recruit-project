@@ -1,6 +1,6 @@
 package com.example.demo.domain.notification.service;
 
-import com.example.demo.domain.notification.NotificationRepository;
+import com.example.demo.domain.notification.repository.NotificationRepository;
 import com.example.demo.domain.notification.entity.Notification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
