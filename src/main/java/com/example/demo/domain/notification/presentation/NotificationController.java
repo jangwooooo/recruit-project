@@ -22,4 +22,10 @@ public class NotificationController {
         List<NotificationResponse> responses = notificationService.getList();
         return new ResponseEntity<>(responses, HttpStatus.OK);
     }
+
+    @PatchMapping("/{notificationId}")
+    public ResponseEntity<Void> checkRead(@PathVariable Long notificationId) {
+        notificationService.read(notificationId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
