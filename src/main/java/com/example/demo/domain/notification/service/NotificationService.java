@@ -49,4 +49,11 @@ public class NotificationService {
                 .orElseThrow(() -> new NotificationNotFound("알림을 찾을 수 없습니다."));
         notification.updateIsRead(true);
     }
+
+    @Transactional
+    public void delete(Long notificationId) {
+        Notification notification = notificationRepository.findById(notificationId)
+                .orElseThrow(() -> new NotificationNotFound("알림을 찾을 수 없습니다."));
+        notificationRepository.delete(notification);
+    }
 }
