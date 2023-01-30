@@ -53,6 +53,10 @@ public class CommentService {
     public void edit(EditCommentRequest request) {
         Comment comment = commentRepository.findCommentByCommentIdAndBoardId(request.getCommentId(),request.getBoardId())
                 .orElseThrow(() -> new CommentNotFound("댓글을 찾을 수 없습니다."));
+        User user = userUtil.currentUser();
+        if(!Objects.equals(user.getName(), comment.getWriter())){
+            throw new TokenNotValidException("권한이 없는 사용자입니다.");
+        }
         comment.updateContent(request.getNewContent());
     }
 
