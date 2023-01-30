@@ -10,12 +10,14 @@ import com.example.demo.domain.board.presentation.dto.response.CommentResponse;
 import com.example.demo.domain.board.repository.BoardRepository;
 import com.example.demo.domain.board.repository.CommentRepository;
 import com.example.demo.domain.user.entity.User;
+import com.example.demo.global.exception.exceptionCollection.TokenNotValidException;
 import com.example.demo.global.util.UserUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -58,6 +60,10 @@ public class CommentService {
     public void delete(DeleteCommentRequest request) {
         Comment comment = commentRepository.findCommentByCommentIdAndBoardId(request.getCommentId(),request.getBoardId())
                 .orElseThrow(() -> new CommentNotFound("댓글을 찾을 수 없습니다."));
+        User user = userUtil.currentUser();
+        if(!Objects.equals(user.getName(), comment.getWriter())){
+            throw new TokenNotValidException("권한이 없는 사용자입니다.");
+        }
         commentRepository.delete(comment);
     }
 }
