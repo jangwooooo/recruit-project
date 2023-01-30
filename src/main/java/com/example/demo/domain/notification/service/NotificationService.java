@@ -41,4 +41,11 @@ public class NotificationService {
                 .map(NotificationResponse::new)
                 .collect(Collectors.toList());
     }
+
+    @Transactional
+    public void read(Long notificationId) {
+        Notification notification = notificationRepository.findById(notificationId)
+                .orElseThrow(() -> new NotificationNotFound("알림을 찾을 수 없습니다."));
+        notification.updateIsRead(true);
+    }
 }

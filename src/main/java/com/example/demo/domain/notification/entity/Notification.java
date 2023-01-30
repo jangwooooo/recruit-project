@@ -25,4 +25,8 @@ public class Notification extends BaseTimeEntity {
     private String generatedUser;
     private String boardAuthor;
     private Boolean isRead;
+
+    public void updateIsRead(Boolean isRead) {
+        this.isRead = isRead;
+    }
 }
