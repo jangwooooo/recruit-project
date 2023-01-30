@@ -9,6 +9,7 @@ import com.example.demo.domain.board.presentation.dto.reqeust.PostCommentRequest
 import com.example.demo.domain.board.presentation.dto.response.CommentResponse;
 import com.example.demo.domain.board.repository.BoardRepository;
 import com.example.demo.domain.board.repository.CommentRepository;
+import com.example.demo.domain.notification.service.NotificationService;
 import com.example.demo.domain.user.entity.User;
 import com.example.demo.global.exception.exceptionCollection.TokenNotValidException;
 import com.example.demo.global.util.UserUtil;
@@ -27,10 +28,12 @@ public class CommentService {
     private final CommentRepository commentRepository;
     private final UserUtil userUtil;
     private final BoardRepository boardRepository;
+    private final NotificationService notificationService;
 
     @Transactional
     public void post(PostCommentRequest request) {
         User user = userUtil.currentUser();
+        notificationService.add(user.getName(),request.getBoardId());
         Comment comment = Comment.builder()
                 .boardId(request.getBoardId())
                 .writer(user.getName())
