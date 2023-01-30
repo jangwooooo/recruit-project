@@ -11,5 +11,5 @@ public class EditCommentRequest {
 
     private Long commentId;
     private Long boardId;
-    private String newComment;
+    private String newContent;
 }
