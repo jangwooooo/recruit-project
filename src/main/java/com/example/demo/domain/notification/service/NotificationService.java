@@ -2,6 +2,7 @@ package com.example.demo.domain.notification.service;
 
 import com.example.demo.domain.board.presentation.dto.response.BoardListResponse;
 import com.example.demo.domain.board.repository.BoardRepository;
+import com.example.demo.domain.notification.exception.NotificationNotFound;
 import com.example.demo.domain.notification.presentation.response.NotificationResponse;
 import com.example.demo.domain.notification.repository.NotificationRepository;
 import com.example.demo.domain.notification.entity.Notification;

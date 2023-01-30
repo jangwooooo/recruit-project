@@ -6,6 +6,7 @@ import com.example.demo.domain.board.exception.CommentNotFound;
 import com.example.demo.domain.email.exception.AuthCodeExpiredException;
 import com.example.demo.domain.email.exception.AuthCodeMismatchException;
 import com.example.demo.domain.email.exception.ManyRequestEmailAuthException;
+import com.example.demo.domain.notification.exception.NotificationNotFound;
 import com.example.demo.domain.user.exception.NameAlreadyExistException;
 import com.example.demo.domain.user.exception.PasswordWrongException;
 import com.example.demo.domain.user.exception.UserNotFoundException;
@@ -137,6 +138,13 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(CommentNotFound.class)
     public ResponseEntity<ErrorResponse> CommentNotFound( CommentNotFound exception,HttpServletRequest request) {
         log.warn("CommentNotFound 발생!!! url:{}, trace:{}", request.getRequestURI(), exception.getStackTrace());
+        ErrorResponse errorResponse = new ErrorResponse(exception.getErrorCode().getMessage(), exception.getErrorCode().getStatus());
+        return new ResponseEntity<>(errorResponse, HttpStatus.valueOf(exception.getErrorCode().getStatus()));
+    }
+
+    @ExceptionHandler(NotificationNotFound.class)
+    public ResponseEntity<ErrorResponse> NotificationNotFound( NotificationNotFound exception,HttpServletRequest request) {
+        log.warn("NotificationNotFound 발생!!! url:{}, trace:{}", request.getRequestURI(), exception.getStackTrace());
         ErrorResponse errorResponse = new ErrorResponse(exception.getErrorCode().getMessage(), exception.getErrorCode().getStatus());
         return new ResponseEntity<>(errorResponse, HttpStatus.valueOf(exception.getErrorCode().getStatus()));
     }
