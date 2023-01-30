@@ -22,4 +22,8 @@ public class Comment extends BaseTimeEntity {
     private String writer;
     @Lob
     private String content;
+
+    public void updateContent(String content) {
+        this.content = content;
+    }
 }
