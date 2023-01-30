@@ -2,6 +2,7 @@ package com.example.demo.domain.notification.entity;
 
 import com.example.demo.global.entity.BaseTimeEntity;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -14,6 +15,7 @@ import javax.persistence.Id;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Notification extends BaseTimeEntity {
 
     @Id
