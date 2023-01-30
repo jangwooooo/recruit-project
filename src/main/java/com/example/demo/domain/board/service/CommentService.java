@@ -2,6 +2,7 @@ package com.example.demo.domain.board.service;
 
 import com.example.demo.domain.board.entity.Comment;
 import com.example.demo.domain.board.exception.BoardNotFoundException;
+import com.example.demo.domain.board.exception.CommentNotFound;
 import com.example.demo.domain.board.presentation.dto.reqeust.EditCommentRequest;
 import com.example.demo.domain.board.presentation.dto.reqeust.PostCommentRequest;
 import com.example.demo.domain.board.presentation.dto.response.BoardListResponse;
@@ -44,5 +45,12 @@ public class CommentService {
         return commentRepository.findCommentsByBoardId(boardId).stream()
                 .map(CommentResponse::new)
                 .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public void edit(EditCommentRequest request) {
+        Comment comment = commentRepository.findCommentByCommentIdAndBoardId(request.getCommentId(),request.getBoardId())
+                .orElseThrow(() -> new CommentNotFound("댓글을 찾을 수 없습니다."));
+        comment.updateContent(request.getNewComment());
     }
 }
