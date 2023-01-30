@@ -1,5 +1,6 @@
 package com.example.demo.domain.board.presentation;
 
+import com.example.demo.domain.board.presentation.dto.reqeust.DeleteCommentRequest;
 import com.example.demo.domain.board.presentation.dto.reqeust.EditCommentRequest;
 import com.example.demo.domain.board.presentation.dto.reqeust.PostCommentRequest;
 import com.example.demo.domain.board.presentation.dto.response.CommentResponse;
@@ -36,6 +37,12 @@ public class CommentController {
     @PatchMapping
     public ResponseEntity<Void> edit(@RequestBody EditCommentRequest request) {
         commentService.edit(request);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Void> delete(@RequestBody DeleteCommentRequest request) {
+        commentService.delete(request);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
