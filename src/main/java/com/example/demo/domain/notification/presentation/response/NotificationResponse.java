@@ -16,14 +16,14 @@ public class NotificationResponse {
 
     private Long notificationId;
     private Long boardId;
-    private String title;
+    private String generatedUser;
     private Boolean isRead;
     private LocalDate createdAt;
 
     public NotificationResponse(Notification notification) {
         this.notificationId = notification.getNotificationId();
         this.boardId = notification.getBoardId();
-        this.title = notification.getGeneratedUser();
+        this.generatedUser = notification.getGeneratedUser();
         this.isRead = notification.getIsRead();
         this.createdAt = notification.getCreatedAt();
     }
