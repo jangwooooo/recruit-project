@@ -23,5 +23,6 @@ public class Notification extends BaseTimeEntity {
     private Long notificationId;
     private Long boardId;
     private String generatedUser;
+    private String boardAuthor;
     private Boolean isRead;
 }

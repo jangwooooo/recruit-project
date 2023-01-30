@@ -33,7 +33,7 @@ public class CommentService {
     @Transactional
     public void post(PostCommentRequest request) {
         User user = userUtil.currentUser();
-        notificationService.add(user.getName(),request.getBoardId());
+        notificationService.add(user.getName(),request.getBoardId(),boardRepository.findAuthorByBoardId(request.getBoardId()).getAuthor());
         Comment comment = Comment.builder()
                 .boardId(request.getBoardId())
                 .writer(user.getName())
