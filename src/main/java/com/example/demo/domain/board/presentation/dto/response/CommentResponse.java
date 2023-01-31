@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Builder
 @Getter
@@ -18,7 +19,7 @@ public class CommentResponse {
     private Long boardId;
     private String writer;
     private String content;
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
 
     public CommentResponse(Comment comment) {
         this.commentId = comment.getCommentId();
